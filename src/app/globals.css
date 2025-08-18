@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0b0b;
+    --fg: #e8e8e8;
+  }
+}
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Notion-like prose spacing */
+.prose {
+  max-width: 68ch;
+}
+.prose h1 { @apply text-3xl font-semibold tracking-tight; }
+.prose h2 { @apply text-2xl font-semibold tracking-tight mt-8; }
+.prose p { @apply leading-7; }
+.prose a { @apply underline underline-offset-4; }
