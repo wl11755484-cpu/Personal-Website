@@ -55,9 +55,10 @@ export const {
           }),
         ]
       : []),
-    EmailProvider(
-      hasSmtp
-        ? {
+    // 只有在有 SMTP 配置时才启用 EmailProvider
+    ...(hasSmtp
+      ? [
+          EmailProvider({
             server: {
               host: process.env.EMAIL_SERVER_HOST!,
               port: Number(process.env.EMAIL_SERVER_PORT || 587),
@@ -71,19 +72,9 @@ export const {
             normalizeIdentifier(identifier) {
               return identifier.trim().toLowerCase();
             },
-          }
-        : {
-            from: process.env.EMAIL_FROM || "no-reply@example.com",
-            maxAge: 10 * 60,
-            normalizeIdentifier(identifier) {
-              return identifier.trim().toLowerCase();
-            },
-            async sendVerificationRequest({ identifier, url }) {
-              console.log("\n[DEV] Magic link generated for:", identifier);
-              console.log("[DEV] Open this link to sign in:", url, "\n");
-            },
-          }
-    ),
+          }),
+        ]
+      : []),
   ],
 });
 
