@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { user, error } = await requireAdmin();
+  const { error } = await requireAdmin();
   if (error) {
     redirect("/login");
   }

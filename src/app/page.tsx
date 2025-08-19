@@ -1,9 +1,7 @@
-import { auth } from "@/auth";
 import { queries } from "@/lib/db";
 import Link from "next/link";
 
 export default async function Home() {
-  const session = await auth();
   const [photos, notes, items] = await Promise.all([
     queries.getPublicPhotos(6),
     queries.getPublicNotes(5),
